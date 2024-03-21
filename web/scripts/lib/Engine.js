@@ -5,10 +5,12 @@ export class Engine {
   #scripts = [];
   #animationID;
   #renderer;
+  #onStop;
 
-  constructor(renderer, inputSystem) {
+  constructor(renderer, inputSystem, onStopCallback) {
     this.#renderer = renderer;
     this.#inputSystem = inputSystem;
+    this.#onStop = onStopCallback;
   }
 
   run() {
@@ -24,6 +26,7 @@ export class Engine {
     this.#stores = {};
     this.#gameObjects = [];
     this.#scripts = [];
+    this.#onStop && this.#onStop();
   }
 
   addGameObject(gameObject) {
@@ -32,6 +35,10 @@ export class Engine {
 
   attachScript(script) {
     this.#scripts.push(script);
+  }
+
+  #destroyObject(id) {
+    this.#gameObjects = [...this.#gameObjects].filter((o) => o.id != id);
   }
 
   #gameLoop() {
@@ -47,6 +54,8 @@ export class Engine {
     return {
       stores: this.#stores,
       inputSystemState: this.#inputSystem.getState(),
+      gameObjects: this.#gameObjects,
+      requestObjectDestruction: (id) => this.#destroyObject(id),
     };
   }
 }
