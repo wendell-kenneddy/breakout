@@ -3,12 +3,14 @@ export class Rect {
   velocity;
   dimensions;
   color;
+  id;
 
   constructor(config) {
     this.position = config.initialPosition;
     this.velocity = config.initialVelocity;
     this.dimensions = config.dimensions;
     this.color = config.color;
+    this.id = Date.now() + Math.random() * 100;
   }
 
   update() {}
