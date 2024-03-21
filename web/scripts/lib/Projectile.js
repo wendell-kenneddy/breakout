@@ -5,7 +5,8 @@ export class Projectile extends Rect {
     super(config);
   }
 
-  update(engineState) {}
-
-  #willCollide(keyCode) {}
+  update(engineState) {
+    this.position.x += this.velocity.x;
+    this.position.y += this.velocity.y;
+  }
 }
