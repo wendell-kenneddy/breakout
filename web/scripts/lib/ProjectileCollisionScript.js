@@ -74,7 +74,11 @@ export class ProjectileCollisionScript {
   }
 
   #checkCollisionWithBounds(projectile, engineState) {
-    if (engineState.gameObjects[2].position.y > 300)
+    if (
+      engineState.gameObjects[2].position.y +
+        engineState.gameObjects[2].dimensions.height >=
+      300
+    )
       return (engineState.stores["game-state"] = 0);
 
     if (
