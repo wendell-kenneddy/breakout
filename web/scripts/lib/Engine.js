@@ -6,11 +6,11 @@ export class Engine {
   #animationID;
   #renderer;
   #onStop;
+  #onEachRender;
 
-  constructor(renderer, inputSystem, onStopCallback) {
+  constructor(renderer, inputSystem) {
     this.#renderer = renderer;
     this.#inputSystem = inputSystem;
-    this.#onStop = onStopCallback;
   }
 
   run() {
@@ -23,10 +23,23 @@ export class Engine {
   stop() {
     window.cancelAnimationFrame(this.#animationID);
     this.#inputSystem.stop();
-    this.#stores = {};
+
+    const lastEngineState = this.getEngineState();
+
+    this.#stores = { "game-state": 0 };
     this.#gameObjects = [];
     this.#scripts = [];
-    this.#onStop && this.#onStop();
+    this.#onStop && this.#onStop(lastEngineState);
+    this.#onStop = null;
+    this.#onEachRender = null;
+  }
+
+  setupEachRenderCallback(onEachRenderCallback) {
+    this.#onEachRender = onEachRenderCallback;
+  }
+
+  setupOnStopCallback(onStopCallback) {
+    this.#onStop = onStopCallback;
   }
 
   addGameObject(gameObject) {
@@ -43,14 +56,15 @@ export class Engine {
 
   #gameLoop() {
     if (this.#stores["game-state"] === 0) return this.stop();
-    const engineState = this.#getEngineState();
+    const engineState = this.getEngineState();
     this.#scripts.forEach((s) => s.execute(engineState));
     this.#renderer.clearScreen();
+    this.#onEachRender && this.#onEachRender(engineState);
     this.#renderer.renderObjects(this.#gameObjects, engineState);
     this.#animationID = window.requestAnimationFrame(() => this.#gameLoop());
   }
 
-  #getEngineState() {
+  getEngineState() {
     return {
       stores: this.#stores,
       inputSystemState: this.#inputSystem.getState(),
