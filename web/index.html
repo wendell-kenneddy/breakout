@@ -3,23 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="author" content="Wendell Kenneddy" />
     <meta name="description" content="A simple breakout clone." />
-    <title>Breakout</title>
+    <title>sillyjam</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/styles/main.css" />
   </head>
 
   <body>
     <header>
-      <h1>Breakout</h1>
+      <h1>Sillyjam</h1>
     </header>
 
     <main>
-      <canvas width="500" height="370">
-        <p>Looks like your browser doesn't support canvas :(</p>
-      </canvas>
-    </main>
+      <h2>Available games</h2>
 
-    <script type="module" src="/js/main.js"></script>
+      <ul>
+        <li>
+          <a
+            href="/games/breakout.html"
+            class="card"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <h3>Breakout</h3>
+            <p>Try to break all the obstacles in order to secure a win!</p>
+          </a>
+        </li>
+      </ul>
+    </main>
   </body>
 </html>
