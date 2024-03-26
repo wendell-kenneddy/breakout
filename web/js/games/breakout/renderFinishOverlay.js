@@ -1,12 +1,12 @@
 export function renderFinishOverlay(finalEngineState, ctx) {
-  const finalScore = finalEngineState.gameObjects.length - 3;
+  const remainingBricksCount = finalEngineState.gameObjects.length - 3;
   const text = { content: "", xPos: 0 };
 
   ctx.fillStyle = "#121212";
   ctx.fillRect(0, 100, 500, 100);
   ctx.fillStyle = "white";
 
-  if (finalScore === 0) {
+  if (remainingBricksCount === 0) {
     text.content = "Max score achieved!";
     text.xPos = 150;
   } else {
