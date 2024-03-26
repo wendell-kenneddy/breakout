@@ -26,10 +26,13 @@ export class ProjectileCollisionScript {
 
   #checkCollisionWithPaddle(projectile, paddle) {
     if (
-      projectile.position.y + projectile.dimensions.height >=
+      projectile.position.y +
+        projectile.dimensions.height +
+        projectile.velocity.y >=
         paddle.position.y &&
-      projectile.position.x + projectile.dimensions.width > paddle.position.x &&
-      projectile.position.x + projectile.dimensions.width <
+      projectile.position.x + projectile.dimensions.width >=
+        paddle.position.x &&
+      projectile.position.x + projectile.dimensions.width <=
         paddle.position.x + paddle.dimensions.width
     ) {
       projectile.velocity.y = -projectile.velocity.y;
@@ -75,8 +78,9 @@ export class ProjectileCollisionScript {
 
   #checkCollisionWithBounds(projectile, engineState) {
     if (
-      engineState.gameObjects[2].position.y +
-        engineState.gameObjects[2].dimensions.height >=
+      projectile.position.y +
+        projectile.dimensions.height +
+        projectile.velocity.y >=
       300
     )
       return (engineState.stores["game-state"] = 0);
