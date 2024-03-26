@@ -1,4 +1,4 @@
-export class Engine {
+export class CoreEngine {
   #stores = {};
   #gameObjects = [];
   #inputSystem;

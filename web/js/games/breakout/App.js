@@ -1,13 +1,13 @@
-import { Engine } from "./Engine.js";
+import { CoreEngine } from "../../engine/CoreEngine.js";
+import { Renderer } from "../../engine/Renderer.js";
+import { KeyboardInputSystem } from "../../engine/KeyboardInputSystem.js";
 import { setupNewBreakoutGame } from "./setupNewBreakoutGame.js";
 import { renderScoreBackground } from "./renderScoreBackground.js";
 import { renderFinishOverlay } from "./renderFinishOverlay.js";
-import { Renderer } from "./Renderer.js";
-import { KeyboardInputSystem } from "./KeyboardInputSystem.js";
 
 export class App {
   #ctx = document.querySelector("canvas").getContext("2d");
-  #engine = new Engine(new Renderer(this.#ctx), new KeyboardInputSystem());
+  #engine = new CoreEngine(new Renderer(this.#ctx), new KeyboardInputSystem());
 
   constructor() {}
 

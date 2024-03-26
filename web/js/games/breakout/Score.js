@@ -1,4 +1,4 @@
-import { Text } from "./Text.js";
+import { Text } from "../../lib/Text.js";
 
 export class Score extends Text {
   constructor(textConfig) {

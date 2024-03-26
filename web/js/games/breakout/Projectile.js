@@ -1,4 +1,4 @@
-import { Rect } from "./Rect.js";
+import { Rect } from "../../lib/Rect.js";
 
 export class Projectile extends Rect {
   constructor(config) {
