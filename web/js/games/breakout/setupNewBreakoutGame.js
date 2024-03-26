@@ -5,11 +5,12 @@ import { Score } from "./Score.js";
 import { createBricks } from "./createBricks.js";
 
 export function setupNewBreakoutGame(engine) {
+  const bricks = createBricks(40, 10, 3, 8);
   const score = new Score({
-    position: { x: 10, y: 350 },
+    position: { x: 10, y: 340 },
     maxWidth: undefined,
-    color: "#000",
-    content: "Score: 0/40",
+    color: "white",
+    content: "Score: 0/" + bricks.length,
     font: "24px sans-serif",
   });
   const paddle = new Paddle({
@@ -42,7 +43,6 @@ export function setupNewBreakoutGame(engine) {
     },
     color: "red",
   });
-  const bricks = createBricks(40, 10, 4, 8);
 
   engine.addGameObject(score);
   engine.addGameObject(paddle);
