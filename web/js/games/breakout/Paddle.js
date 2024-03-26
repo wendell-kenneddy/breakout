@@ -18,8 +18,7 @@ export class Paddle extends Rect {
   }
 
   #willCollide(keyCode) {
-    if (keyCode === 39)
-      return this.position.x + this.dimensions.width + this.velocity.x > 500;
-    if (keyCode === 37) return this.position.x - this.velocity.x < 0;
+    if (keyCode === 39) return this.position.x + this.dimensions.width >= 500;
+    if (keyCode === 37) return this.position.x <= 0;
   }
 }
